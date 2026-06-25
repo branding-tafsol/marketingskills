@@ -1,0 +1,13 @@
+selenium==4.10.0
+beautifulsoup4==4.12.3
+requests==2.31.0
+python-dotenv==1.0.0
+pandas==2.2.2
+openpyxl==3.1.2
+schedule==1.2.0
+praw==7.7.1
+PyYAML==6.0.1
+duckduckgo-search==8.1.1
+facebook-business
+google-auth==2.25.0
+google-api-python-client==2.100.0
