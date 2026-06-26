@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy July 4th 2026 — Tafsol Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Playfair+Display:wght@900&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#111; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+
+.banner {
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  /* BRIGHT sky gradient */
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%, #1a6fd4 0%, #2255b8 30%, #1a3d8f 60%, #0f2460 100%);
+}
+
+/* Bright horizon glow */
+.horizon {
+  position: absolute;
+  bottom: 200px;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%,
+    rgba(255, 180, 40, 0.45) 0%,
+    rgba(255, 100, 30, 0.25) 40%,
+    transparent 70%);
+  z-index: 1;
+}
+
+/* Bright cloud streaks */
+.cloud {
+  position: absolute;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.12);
+  z-index: 2;
+  animation: driftCloud var(--cd) linear infinite;
+}
+@keyframes driftCloud {
+  from { transform: translateX(-200px); opacity:0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  to   { transform: translateX(1300px); opacity:0; }
+}
+
+/* Canvas */
+#canvas {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1080px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Stars (fewer — bright sky) */
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle var(--d) ease-in-out infinite alternate;
+  animation-delay: var(--dd);
+  z-index: 3;
+}
+@keyframes twinkle {
+  from { opacity: var(--a); transform:scale(1); }
+  to   { opacity: 1; transform:scale(1.6); }
+}
+
+/* Shooting stars */
+.shoot {
+  position: absolute;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #fff 50%, rgba(255,240,180,0.8));
+  z-index: 4;
+  opacity: 0;
+  animation: shoot var(--st) ease-in infinite var(--sd);
+}
+@keyframes shoot {
+  0%   { opacity:0; transform: translateX(0) translateY(0); width:0; }
+  5%   { opacity:1; width:var(--sw); }
+  70%  { opacity:0.8; }
+  100% { opacity:0; transform: translateX(500px) translateY(80px); width:var(--sw); }
+}
+
+/* ── MAIN TEXT ─────────────────────────────────────────────── */
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding-bottom: 160px;
+}
+
+.top-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  letter-spacing: 12px;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  animation: fadeDown 1s ease 0.2s both;
+}
+
+/* HAPPY — bright white with blue glow */
+.t-happy {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 118px;
+  letter-spacing: 14px;
+  color: #ffffff;
+  text-shadow:
+    0 0 15px rgba(100,180,255,1),
+    0 0 40px rgba(80,160,255,0.8),
+    0 0 80px rgba(60,130,255,0.5),
+    0 4px 0 rgba(0,40,120,0.4);
+  line-height: 1;
+  animation: fadeDown 0.9s ease 0.4s both, floatText 4s ease-in-out 1.4s infinite alternate;
+}
+
+/* JULY — vivid bright red-orange gradient */
+.t-july {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 210px;
+  line-height: 0.85;
+  background: linear-gradient(160deg,
+    #ff2200 0%,
+    #ff5500 20%,
+    #ffcc00 45%,
+    #ff5500 70%,
+    #ff2200 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter:
+    drop-shadow(0 0 12px rgba(255,80,0,0.9))
+    drop-shadow(0 0 35px rgba(255,60,0,0.7))
+    drop-shadow(0 0 70px rgba(255,40,0,0.4));
+  animation: fadeUp 0.9s ease 0.6s both, pulseRed 2.5s ease-in-out 1.6s infinite alternate;
+}
+@keyframes pulseRed {
+  from { filter: drop-shadow(0 0 10px rgba(255,80,0,0.8)) drop-shadow(0 0 30px rgba(255,60,0,0.6)); }
+  to   { filter: drop-shadow(0 0 25px rgba(255,120,0,1))  drop-shadow(0 0 60px rgba(255,80,0,0.9)) drop-shadow(0 0 100px rgba(255,50,0,0.5)); }
+}
+
+/* 4TH — bright gold */
+.t-fourth {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 92px;
+  letter-spacing: 28px;
+  color: #ffe040;
+  text-shadow:
+    0 0 15px rgba(255,220,0,1),
+    0 0 40px rgba(255,200,0,0.8),
+    0 0 80px rgba(255,160,0,0.5),
+    0 3px 0 rgba(120,80,0,0.5);
+  line-height: 1;
+  margin-top: -6px;
+  animation: fadeUp 0.9s ease 0.8s both, floatText 4s ease-in-out 2s infinite alternate;
+}
+
+@keyframes floatText {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+/* Stars row */
+.star-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0 10px;
+  animation: fadeIn 1s ease 1.2s both;
+}
+.star-item { font-size: 22px; color: #ffe040; animation: spinStar 3s linear infinite; }
+.star-item:nth-child(2) { animation-delay: 0.4s; font-size: 14px; }
+.star-item:nth-child(3) { animation-delay: 0.8s; }
+.star-item:nth-child(4) { animation-delay: 1.2s; font-size: 14px; }
+.star-item:nth-child(5) { animation-delay: 1.6s; }
+@keyframes spinStar {
+  from { transform:rotate(0); }
+  to   { transform:rotate(360deg); }
+}
+
+.t-year {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 22px;
+  letter-spacing: 20px;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+  animation: fadeIn 1s ease 1.4s both;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 16px 0;
+  animation: fadeIn 1s ease 1.5s both;
+}
+.div-line {
+  width: 160px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(255,220,60,0.9), transparent);
+}
+
+.t-independence {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 10px;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  animation: fadeIn 1s ease 1.6s both;
+}
+
+/* ── FLAG ───────────────────────────────────────────────── */
+.flag-wrap {
+  position: absolute;
+  top: 65px;
+  right: 65px;
+  z-index: 15;
+  opacity: 0.85;
+}
+.flagpole-bar {
+  position: absolute;
+  top: 0;
+  right: 215px;
+  width: 5px;
+  height: 210px;
+  background: linear-gradient(180deg, #ffe040, #d4a800);
+  border-radius: 3px;
+  z-index: 15;
+}
+.pole-ball {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 35% 35%, #fffde0, #ffe040);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255,220,0,0.8);
+}
+.flag-svg {
+  width: 210px;
+  height: 115px;
+  animation: waveFlag 1.8s ease-in-out infinite;
+  transform-origin: left center;
+  filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.4));
+}
+@keyframes waveFlag {
+  0%   { clip-path: polygon(0 4%,33% 0,67% 4%,100% 0,100% 96%,67% 100%,33% 96%,0 100%); }
+  50%  { clip-path: polygon(0 0%,33% 4%,67% 0%,100% 4%,100% 100%,67% 96%,33% 100%,0 96%); }
+  100% { clip-path: polygon(0 4%,33% 0,67% 4%,100% 0,100% 96%,67% 100%,33% 96%,0 100%); }
+}
+
+/* ── CONFETTI ───────────────────────────────────────────── */
+.conf {
+  position: absolute;
+  top: -20px;
+  z-index: 25;
+  animation: confFall var(--cf) linear infinite var(--cs);
+  opacity: 0.9;
+}
+@keyframes confFall {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity:0.9; }
+  100% { transform: translateY(1120px) rotate(var(--cr)) scale(0.8); opacity:0; }
+}
+
+/* ── SKYLINE ────────────────────────────────────────────── */
+.skyline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 8;
+}
+
+/* ── BRAND BAR ──────────────────────────────────────────── */
+.brand-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 128px;
+  background: linear-gradient(180deg, rgba(5,15,45,0) 0%, rgba(5,15,45,0.97) 35%, rgba(3,10,30,1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 56px;
+  z-index: 30;
+}
+.b-left { display:flex; align-items:center; gap:18px; }
+.b-icon {
+  width: 54px; height: 54px;
+  background: linear-gradient(135deg, #1a5fd4, #3388ff);
+  border-radius: 13px;
+  display: flex; align-items:center; justify-content:center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px; font-weight: 700; color: #fff;
+  box-shadow: 0 0 20px rgba(60,140,255,0.6), 0 0 40px rgba(40,100,255,0.3);
+}
+.b-name { font-family:'Inter',sans-serif; font-weight:600; font-size:18px; color:#fff; }
+.b-sub  { font-family:'Inter',sans-serif; font-weight:300; font-size:11px; color:rgba(255,255,255,0.5); letter-spacing:2px; text-transform:uppercase; margin-top:3px; }
+.b-right { font-family:'Inter',sans-serif; font-size:13px; color:rgba(255,255,255,0.45); letter-spacing:2px; text-align:right; text-transform:uppercase; }
+.b-right strong { display:block; font-size:15px; color:rgba(255,220,60,0.9); font-weight:600; letter-spacing:1px; text-transform:none; margin-top:3px; }
+
+/* Animations */
+@keyframes fadeDown { from{opacity:0;transform:translateY(-28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp   { from{opacity:0;transform:translateY(28px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+
+/* Top stripe decorations */
+.stripe-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg,
+    #cc1111 0%, #cc1111 7.69%,
+    #fff 7.69%, #fff 15.38%,
+    #cc1111 15.38%, #cc1111 23.07%,
+    #fff 23.07%, #fff 30.76%,
+    #cc1111 30.76%, #cc1111 38.45%,
+    #fff 38.45%, #fff 46.15%,
+    #cc1111 46.15%, #cc1111 53.84%,
+    #fff 53.84%, #fff 61.53%,
+    #cc1111 61.53%, #cc1111 69.22%,
+    #fff 69.22%, #fff 76.92%,
+    #cc1111 76.92%, #cc1111 84.61%,
+    #fff 84.61%, #fff 92.3%,
+    #cc1111 92.3%, #cc1111 100%);
+  z-index: 30;
+  opacity: 0.9;
+}
+.stripe-bar-bottom {
+  position: absolute;
+  bottom: 128px; left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255,220,60,0.6), transparent);
+  z-index: 30;
+}
+
+/* Corner stars */
+.corner-star {
+  position: absolute;
+  font-size: 28px;
+  color: rgba(255,220,60,0.85);
+  z-index: 20;
+  animation: cornerPulse 2s ease-in-out infinite alternate;
+}
+@keyframes cornerPulse {
+  from { opacity:0.6; transform:scale(1) rotate(0deg); }
+  to   { opacity:1;   transform:scale(1.15) rotate(15deg); }
+}
+</style>
+</head>
+<body>
+<div class="banner" id="banner">
+
+  <!-- Top stripe -->
+  <div class="stripe-bar"></div>
+
+  <!-- Horizon glow -->
+  <div class="horizon"></div>
+
+  <!-- Clouds -->
+  <div class="cloud" style="width:280px;height:35px;top:15%;left:-300px;--cd:22s;animation-delay:0s"></div>
+  <div class="cloud" style="width:200px;height:25px;top:25%;left:-300px;--cd:28s;animation-delay:6s"></div>
+  <div class="cloud" style="width:320px;height:40px;top:10%;left:-300px;--cd:35s;animation-delay:12s"></div>
+
+  <!-- Stars -->
+  <div id="stars-wrap"></div>
+
+  <!-- Shooting stars -->
+  <div class="shoot" style="top:8%;left:8%;--st:4s;--sd:0.5s;--sw:200px"></div>
+  <div class="shoot" style="top:18%;left:20%;--st:5s;--sd:2s;--sw:160px"></div>
+  <div class="shoot" style="top:6%;left:55%;--st:4.5s;--sd:4s;--sw:180px"></div>
+  <div class="shoot" style="top:22%;left:65%;--st:3.5s;--sd:1s;--sw:140px"></div>
+
+  <!-- Canvas for fireworks -->
+  <canvas id="canvas" width="1080" height="1080"></canvas>
+
+  <!-- Corner stars -->
+  <span class="corner-star" style="top:55px;left:55px;animation-delay:0s">★</span>
+  <span class="corner-star" style="top:55px;left:100px;animation-delay:0.3s;font-size:18px">★</span>
+  <span class="corner-star" style="top:90px;left:70px;animation-delay:0.6s;font-size:14px">★</span>
+
+  <!-- Flag -->
+  <div class="flagpole-bar"><div class="pole-ball"></div></div>
+  <div class="flag-wrap">
+    <svg class="flag-svg" viewBox="0 0 210 115" xmlns="http://www.w3.org/2000/svg">
+      <rect width="210" height="115" fill="#B22234"/>
+      <rect y="8.85"  width="210" height="8.85" fill="#fff"/>
+      <rect y="26.55" width="210" height="8.85" fill="#fff"/>
+      <rect y="44.25" width="210" height="8.85" fill="#fff"/>
+      <rect y="61.95" width="210" height="8.85" fill="#fff"/>
+      <rect y="79.65" width="210" height="8.85" fill="#fff"/>
+      <rect y="97.35" width="210" height="8.85" fill="#fff"/>
+      <rect width="84" height="61.95" fill="#3C3B6E"/>
+      <g fill="#fff" font-size="9" font-family="Arial">
+        <text x="5"  y="11">★</text><text x="19" y="11">★</text><text x="33" y="11">★</text><text x="47" y="11">★</text><text x="61" y="11">★</text>
+        <text x="12" y="21">★</text><text x="26" y="21">★</text><text x="40" y="21">★</text><text x="54" y="21">★</text>
+        <text x="5"  y="31">★</text><text x="19" y="31">★</text><text x="33" y="31">★</text><text x="47" y="31">★</text><text x="61" y="31">★</text>
+        <text x="12" y="41">★</text><text x="26" y="41">★</text><text x="40" y="41">★</text><text x="54" y="41">★</text>
+        <text x="5"  y="51">★</text><text x="19" y="51">★</text><text x="33" y="51">★</text><text x="47" y="51">★</text><text x="61" y="51">★</text>
+        <text x="12" y="58">★</text><text x="26" y="58">★</text><text x="40" y="58">★</text><text x="54" y="58">★</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Confetti container -->
+  <div id="confetti"></div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="top-label">Tafsol Technologies</div>
+    <div class="t-happy">HAPPY</div>
+    <div class="t-july">July</div>
+    <div class="t-fourth">4<sup style="font-size:42px;letter-spacing:4px;font-family:'Inter',sans-serif;font-weight:300;vertical-align:super">th</sup></div>
+    <div class="star-row">
+      <span class="star-item">★</span>
+      <span class="star-item">✦</span>
+      <span class="star-item">★</span>
+      <span class="star-item">✦</span>
+      <span class="star-item">★</span>
+    </div>
+    <div class="t-year">★ &nbsp;&nbsp; 2 0 2 6 &nbsp;&nbsp; ★</div>
+    <div class="divider">
+      <div class="div-line"></div>
+      <span style="color:#ffe040;font-size:16px">✦</span>
+      <div class="div-line"></div>
+    </div>
+    <div class="t-independence">Independence Day</div>
+  </div>
+
+  <!-- Stripe accent -->
+  <div class="stripe-bar-bottom"></div>
+
+  <!-- Skyline -->
+  <svg class="skyline" viewBox="0 0 1080 290" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="bGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a3060" stop-opacity="0.95"/>
+        <stop offset="100%" stop-color="#0d1a3a" stop-opacity="1"/>
+      </linearGradient>
+      <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1a3a6a" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#0d1a35" stop-opacity="0.9"/>
+      </linearGradient>
+    </defs>
+    <!-- Ground -->
+    <rect x="0" y="230" width="1080" height="60" fill="url(#bGrad)"/>
+    <!-- Buildings — bright blue tones -->
+    <rect x="0"   y="190" width="55"  height="100" fill="#1e3870"/>
+    <rect x="60"  y="150" width="42"  height="140" fill="#1a3268"/>
+    <rect x="107" y="170" width="38"  height="120" fill="#1e3870"/>
+    <rect x="150" y="120" width="52"  height="170" fill="#162e66"/>
+    <rect x="207" y="155" width="38"  height="135" fill="#1a3268"/>
+    <rect x="250" y="130" width="48"  height="160" fill="#162e66"/>
+    <rect x="303" y="180" width="36"  height="110" fill="#1e3870"/>
+    <rect x="344" y="148" width="44"  height="142" fill="#1a3268"/>
+    <!-- Empire State — center bright -->
+    <rect x="476" y="70"  width="68"  height="220" fill="#1a3268"/>
+    <rect x="490" y="42"  width="40"  height="82"  fill="#162e66"/>
+    <rect x="507" y="12"  width="8"   height="52"  fill="#1a3268"/>
+    <!-- Right buildings -->
+    <rect x="558" y="138" width="48"  height="152" fill="#1e3870"/>
+    <rect x="611" y="108" width="58"  height="182" fill="#162e66"/>
+    <rect x="674" y="148" width="42"  height="142" fill="#1a3268"/>
+    <rect x="721" y="128" width="54"  height="162" fill="#162e66"/>
+    <rect x="780" y="160" width="44"  height="130" fill="#1e3870"/>
+    <rect x="829" y="175" width="48"  height="115" fill="#1a3268"/>
+    <rect x="882" y="148" width="42"  height="142" fill="#162e66"/>
+    <rect x="929" y="182" width="52"  height="108" fill="#1e3870"/>
+    <rect x="986" y="162" width="94"  height="128" fill="#1a3268"/>
+    <!-- Lit windows — bright yellow/white -->
+    <g fill="rgba(255,240,120,0.75)">
+      <rect x="68"  y="162" width="7" height="6" rx="1"/>
+      <rect x="80"  y="174" width="7" height="6" rx="1"/>
+      <rect x="160" y="132" width="8" height="6" rx="1"/>
+      <rect x="174" y="148" width="8" height="6" rx="1"/>
+      <rect x="258" y="142" width="9" height="6" rx="1"/>
+      <rect x="275" y="158" width="9" height="6" rx="1"/>
+      <rect x="490" y="90"  width="9" height="6" rx="1"/>
+      <rect x="507" y="108" width="9" height="6" rx="1"/>
+      <rect x="524" y="90"  width="9" height="6" rx="1"/>
+      <rect x="570" y="152" width="9" height="6" rx="1"/>
+      <rect x="622" y="122" width="10" height="6" rx="1"/>
+      <rect x="640" y="138" width="10" height="6" rx="1"/>
+      <rect x="732" y="142" width="9" height="6" rx="1"/>
+      <rect x="750" y="158" width="9" height="6" rx="1"/>
+      <rect x="838" y="188" width="9" height="6" rx="1"/>
+      <rect x="892" y="162" width="8" height="6" rx="1"/>
+      <rect x="940" y="196" width="9" height="6" rx="1"/>
+    </g>
+    <!-- Statue of Liberty -->
+    <g transform="translate(410,88)" fill="#162e66">
+      <rect x="-20" y="128" width="40" height="22" rx="2"/>
+      <rect x="-14" y="108" width="28" height="22" rx="2"/>
+      <rect x="-11" y="58"  width="22" height="55" rx="3"/>
+      <ellipse cx="0" cy="50" rx="13" ry="15"/>
+      <polygon points="0,0 -5,14 5,14"/>
+      <polygon points="-9,4 -16,16 -5,16"/>
+      <polygon points="9,4 16,16 5,16"/>
+      <polygon points="-13,10 -19,20 -9,20"/>
+      <polygon points="13,10 19,20 9,20"/>
+      <rect x="10" y="70" width="5" height="24" rx="2" transform="rotate(-22,12,82)"/>
+      <rect x="22" y="46" width="8" height="16" rx="3"/>
+      <ellipse cx="26" cy="44" rx="5.5" ry="4" fill="rgba(255,220,80,0.7)"/>
+    </g>
+    <!-- Water -->
+    <rect x="0" y="252" width="1080" height="38" fill="url(#waterGrad)"/>
+    <rect x="0" y="253" width="1080" height="1.5" fill="rgba(100,160,255,0.2)"/>
+  </svg>
+
+  <!-- Brand bar -->
+  <div class="brand-bar">
+    <div class="b-left">
+      <div class="b-icon">T</div>
+      <div>
+        <div class="b-name">Tafsol Technologies</div>
+        <div class="b-sub">AI · Web · Mobile · Software</div>
+      </div>
+    </div>
+    <div class="b-right">
+      www.tafsol.com
+      <strong>🎆 Happy 4th of July!</strong>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── BACKGROUND STARS ──────────────────────────────────────────────────────
+const sw = document.getElementById('stars-wrap');
+for (let i = 0; i < 90; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.8;
+  s.style.cssText = `
+    width:${sz}px;height:${sz}px;
+    top:${Math.random()*55}%;
+    left:${Math.random()*100}%;
+    --d:${(Math.random()*2.5+1).toFixed(1)}s;
+    --dd:${(Math.random()*4).toFixed(1)}s;
+    --a:${(Math.random()*0.3+0.1).toFixed(2)};
+    z-index:3;position:absolute;
+  `;
+  sw.appendChild(s);
+}
+
+// ─── CONFETTI ──────────────────────────────────────────────────────────────
+const cc = document.getElementById('confetti');
+const cols = ['#ff2222','#ffffff','#2255ff','#ffcc00','#ff88aa','#44ddff','#ff7700'];
+for (let i = 0; i < 75; i++) {
+  const el = document.createElement('div');
+  el.className = 'conf';
+  const w = Math.random()*7+4, h = Math.random()*12+7;
+  el.style.cssText = `
+    left:${Math.random()*100}%;
+    width:${w}px;height:${h}px;
+    background:${cols[Math.floor(Math.random()*cols.length)]};
+    border-radius:${Math.random()>0.5?'50%':'2px'};
+    --cf:${(Math.random()*4+3).toFixed(1)}s;
+    --cs:${(Math.random()*6-1).toFixed(1)}s;
+    --cr:${Math.floor(Math.random()*720+180)}deg;
+    transform:rotate(${Math.random()*360}deg);
+    z-index:25;
+  `;
+  cc.appendChild(el);
+}
+
+// ─── FIREWORKS ENGINE ──────────────────────────────────────────────────────
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = 1080, H = 1080;
+
+// Vivid bright color palettes
+const PALETTES = [
+  ['#ff2222','#ff5544','#ff8866','#ffaa99','#ff3333'],   // Red
+  ['#ffffff','#eeeeff','#ccddff','#aabbee','#ddeeff'],   // White/Silver
+  ['#ffdd00','#ffee33','#ffff66','#ffcc00','#ffe040'],   // Gold
+  ['#3399ff','#55aaff','#77bbff','#99ccff','#44aaff'],   // Blue
+  ['#ff5500','#ff7733','#ff9955','#ffbb77','#ff6600'],   // Orange
+  ['#ff22aa','#ff55cc','#ff77dd','#ff99ee','#ff44bb'],   // Pink
+  ['#22ffdd','#44ffee','#66ffff','#88eeee','#33ffcc'],   // Cyan
+  ['#cc44ff','#dd66ff','#ee88ff','#ffaaff','#bb33ff'],   // Purple
+  ['#ff4422','#ffaa22','#ffff22','#22ffaa','#22aaff'],   // Rainbow burst
+];
+
+class Spark {
+  constructor(x, y, pal, type) {
+    this.x = x; this.y = y;
+    this.color = pal[Math.floor(Math.random()*pal.length)];
+    const angle = Math.random() * Math.PI * 2;
+    // Burst types: normal, chrysanthemum (slower decay), willow (droopy)
+    const baseSpeed = type === 'big' ? Math.random()*9+4 : Math.random()*6+2;
+    this.vx = Math.cos(angle) * baseSpeed;
+    this.vy = Math.sin(angle) * baseSpeed;
+    this.alpha = 1;
+    this.decay = type === 'big'
+      ? Math.random()*0.012+0.006
+      : Math.random()*0.018+0.010;
+    this.size = Math.random()*3.5+1.5;
+    this.gravity = type === 'willow' ? 0.22 : 0.12;
+    this.twinkle = Math.random() > 0.5;
+    this.twinkleTimer = 0;
+    this.trail = [];
+  }
+  update() {
+    this.trail.push({x:this.x, y:this.y, a:this.alpha});
+    if (this.trail.length > 7) this.trail.shift();
+    this.vy += this.gravity;
+    this.vx *= 0.975;
+    this.vy *= 0.975;
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.twinkle) {
+      this.twinkleTimer++;
+      if (this.twinkleTimer % 3 === 0) this.alpha -= this.decay * 0.5;
+      else this.alpha -= this.decay * 1.5;
+    } else {
+      this.alpha -= this.decay;
+    }
+  }
+  draw() {
+    // Trail
+    for (let i = 0; i < this.trail.length; i++) {
+      const t = this.trail[i];
+      const ratio = i / this.trail.length;
+      ctx.save();
+      ctx.globalAlpha = t.a * ratio * 0.5;
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, this.size * ratio * 0.7, 0, Math.PI*2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    }
+    // Core
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, this.alpha);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+    ctx.fillStyle = this.color;
+    ctx.shadowColor = this.color;
+    ctx.shadowBlur = 14;
+    ctx.fill();
+    // Bright center
+    ctx.globalAlpha = Math.max(0, this.alpha * 0.8);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 0.4, 0, Math.PI*2);
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowBlur = 6;
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+class Rocket {
+  constructor(delay) {
+    this.delay = delay || 0;
+    this.timer = 0;
+    this.reset();
+    this.launched = false;
+  }
+  reset() {
+    // Launch from bottom, aim at upper portion
+    this.x = Math.random()*820 + 130;
+    this.y = H;
+    this.tx = Math.random()*780 + 150;
+    this.ty = Math.random()*420 + 60;
+    const angle = Math.atan2(this.ty - this.y, this.tx - this.x);
+    const spd = Math.random()*9+16;
+    this.vx = Math.cos(angle)*spd;
+    this.vy = Math.sin(angle)*spd;
+    this.exploded = false;
+    this.particles = [];
+    this.palette = PALETTES[Math.floor(Math.random()*PALETTES.length)];
+    this.burstType = ['big','normal','willow'][Math.floor(Math.random()*3)];
+    this.particleCount = this.burstType === 'big' ? 200 : 140;
+    this.trail = [];
+    this.done = false;
+    this.timer = 0;
+  }
+  update() {
+    this.timer++;
+    if (this.timer < this.delay) return;
+    if (this.exploded) {
+      this.particles.forEach(p => p.update());
+      this.particles = this.particles.filter(p => p.alpha > 0.01);
+      if (this.particles.length === 0) {
+        this.delay = Math.floor(Math.random()*80);
+        this.reset();
+      }
+      return;
+    }
+    this.trail.push({x:this.x, y:this.y});
+    if (this.trail.length > 10) this.trail.shift();
+    this.vy += 0.2;
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.vy >= 0 || Math.abs(this.y - this.ty) < 15) {
+      this.burst();
+    }
+  }
+  burst() {
+    this.exploded = true;
+    // Flash
+    ctx.save();
+    const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 50);
+    g.addColorStop(0, 'rgba(255,255,255,0.95)');
+    g.addColorStop(0.4, `${this.palette[0]}88`);
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 50, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+    // Spawn particles
+    for (let i = 0; i < this.particleCount; i++) {
+      this.particles.push(new Spark(this.x, this.y, this.palette, this.burstType));
+    }
+    // Extra glitter for big bursts
+    if (this.burstType === 'big') {
+      for (let i = 0; i < 40; i++) {
+        const s = new Spark(this.x, this.y, ['#ffffff','#fffde0','#ffe080'], 'normal');
+        s.size = Math.random()*2+0.5;
+        s.decay *= 0.6;
+        this.particles.push(s);
+      }
+    }
+  }
+  draw() {
+    if (this.timer < this.delay || this.exploded) {
+      if (this.exploded) this.particles.forEach(p => p.draw());
+      return;
+    }
+    // Rocket trail
+    for (let i = 0; i < this.trail.length; i++) {
+      const t = this.trail[i];
+      const r = i/this.trail.length;
+      ctx.save();
+      ctx.globalAlpha = r*0.8;
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, 2.5*r, 0, Math.PI*2);
+      ctx.fillStyle = '#ffe090';
+      ctx.shadowColor = '#ffcc44';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+    }
+    // Rocket head
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, 3.5, 0, Math.PI*2);
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowColor = '#ffe0a0';
+    ctx.shadowBlur = 16;
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// Create rockets — staggered launches
+const rockets = [];
+for (let i = 0; i < 16; i++) {
+  rockets.push(new Rocket(i * 35));
+}
+
+let frame = 0;
+function animate() {
+  frame++;
+  // Bright fade — less dark for vivid feel
+  ctx.fillStyle = 'rgba(15, 30, 80, 0.20)';
+  ctx.fillRect(0, 0, W, H);
+  rockets.forEach(r => { r.update(); r.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
