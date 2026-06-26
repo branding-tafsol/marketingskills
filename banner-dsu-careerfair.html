@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tafsol — DHA Suffa University Career Fair 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#111; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+
+.banner {
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  background: #6b0b0b;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── BACKGROUND: building photo overlay ─────────────────── */
+.bg-building {
+  position: absolute;
+  inset: 0;
+  background:
+    /* dark red overlay */
+    linear-gradient(180deg,
+      rgba(80,5,5,0.72) 0%,
+      rgba(100,8,8,0.65) 40%,
+      rgba(80,5,5,0.80) 100%),
+    /* fallback pattern simulating a building */
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 2px,
+      transparent 2px, transparent 60px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 2px,
+      transparent 2px, transparent 50px
+    );
+  z-index: 1;
+}
+
+/* ── TAFSOL LOGO ─────────────────────────────────────────── */
+.tafsol-logo {
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.logo-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 72px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 3px;
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+.logo-dot {
+  width: 72px;
+  height: 72px;
+  margin: 0 2px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-dot svg { width: 72px; height: 72px; }
+
+/* ── PARTICIPATED BADGE ──────────────────────────────────── */
+.participated-wrap {
+  position: absolute;
+  top: 158px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  animation: popIn 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 0.3s both;
+}
+.participated-badge {
+  background: #f5c800;
+  border-radius: 14px;
+  padding: 14px 52px;
+  display: inline-block;
+}
+.participated-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  color: #1a0a00;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+/* ── AT TEXT ─────────────────────────────────────────────── */
+.at-text {
+  position: absolute;
+  top: 268px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 38px;
+  color: #ffffff;
+  letter-spacing: 8px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  animation: fadeIn 0.8s ease 0.6s both;
+}
+
+/* ── DSU LOGO (center) ───────────────────────────────────── */
+.dsu-logo {
+  position: absolute;
+  top: 318px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 190px;
+  height: 190px;
+  animation: fadeIn 0.8s ease 0.8s both;
+}
+.dsu-logo svg { width: 100%; height: 100%; }
+
+/* ── UNIVERSITY NAME ─────────────────────────────────────── */
+.uni-name {
+  position: absolute;
+  top: 510px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  text-align: center;
+  animation: fadeIn 0.8s ease 1s both;
+}
+.uni-main {
+  font-family: 'Oswald', sans-serif;
+  font-size: 62px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.uni-sub {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 1px;
+  margin-top: 4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* ── PHOTO FRAMES ────────────────────────────────────────── */
+.photo {
+  position: absolute;
+  z-index: 15;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.15);
+  background: #3a0a0a;
+  animation: photoIn 0.6s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Placeholder when no image */
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #5a1010, #3a0808);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* LEFT DIAGONAL — 3 photos going top-right → bottom-left */
+/* Photo L1 — top, closest to center */
+.photo-l1 {
+  width: 200px; height: 148px;
+  top: 310px;
+  left: 148px;
+  animation-delay: 0.4s;
+}
+/* Photo L2 — middle */
+.photo-l2 {
+  width: 190px; height: 140px;
+  top: 488px;
+  left: 84px;
+  animation-delay: 0.55s;
+}
+/* Photo L3 — bottom, furthest left */
+.photo-l3 {
+  width: 180px; height: 134px;
+  top: 658px;
+  left: 28px;
+  animation-delay: 0.7s;
+}
+
+/* RIGHT DIAGONAL — 3 photos going top-left → bottom-right */
+/* Photo R1 — top, closest to center */
+.photo-r1 {
+  width: 200px; height: 148px;
+  top: 310px;
+  right: 148px;
+  animation-delay: 0.45s;
+}
+/* Photo R2 — middle */
+.photo-r2 {
+  width: 190px; height: 140px;
+  top: 488px;
+  right: 84px;
+  animation-delay: 0.6s;
+}
+/* Photo R3 — bottom, furthest right */
+.photo-r3 {
+  width: 180px; height: 134px;
+  top: 658px;
+  right: 28px;
+  animation-delay: 0.75s;
+}
+
+/* ── BOTTOM BAR ──────────────────────────────────────────── */
+.bottom-bar {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background: rgba(255,255,255,0.96);
+  border-radius: 50px;
+  padding: 14px 44px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: fadeIn 0.8s ease 1.2s both;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  white-space: nowrap;
+}
+.bottom-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #1a0808;
+  letter-spacing: 0.3px;
+}
+.bottom-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-sep {
+  width: 1.5px;
+  height: 24px;
+  background: rgba(0,0,0,0.15);
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes popIn {
+  from { opacity:0; transform:translateX(-50%) scale(0.7); }
+  to   { opacity:1; transform:translateX(-50%) scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+@keyframes photoIn {
+  from { opacity:0; transform: scale(0.75) rotate(-4deg); }
+  to   { opacity:1; transform: scale(1) rotate(0deg); }
+}
+
+/* Diagonal guide lines (subtle) */
+.diag-line {
+  position: absolute;
+  z-index: 12;
+  pointer-events: none;
+  opacity: 0.18;
+}
+</style>
+</head>
+<body>
+<div class="banner">
+
+  <!-- Background -->
+  <div class="bg-building"></div>
+
+  <!-- TAFSOL Logo -->
+  <div class="tafsol-logo">
+    <span class="logo-text">TAFS</span>
+    <div class="logo-dot">
+      <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="36" cy="36" r="34" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <!-- Colorful brain/dot cluster -->
+        <circle cx="36" cy="20" r="10" fill="#ff4444"/>
+        <circle cx="50" cy="30" r="8"  fill="#ff9900"/>
+        <circle cx="52" cy="46" r="8"  fill="#22cc55"/>
+        <circle cx="36" cy="54" r="8"  fill="#2255ff"/>
+        <circle cx="20" cy="46" r="8"  fill="#aa22ff"/>
+        <circle cx="18" cy="30" r="8"  fill="#ff44aa"/>
+        <circle cx="36" cy="36" r="6"  fill="#ffdd00"/>
+        <!-- Connecting dots -->
+        <circle cx="43" cy="24" r="3"  fill="#ff7700"/>
+        <circle cx="48" cy="38" r="2.5" fill="#33dd66"/>
+        <circle cx="43" cy="50" r="3"  fill="#3366ff"/>
+        <circle cx="29" cy="50" r="2.5" fill="#8833ff"/>
+        <circle cx="24" cy="38" r="3"  fill="#ff33bb"/>
+        <circle cx="29" cy="24" r="2.5" fill="#ff3333"/>
+      </svg>
+    </div>
+    <span class="logo-text">L</span>
+  </div>
+
+  <!-- PARTICIPATED Badge -->
+  <div class="participated-wrap">
+    <div class="participated-badge">
+      <div class="participated-text">PARTICIPATED</div>
+    </div>
+  </div>
+
+  <!-- AT -->
+  <div class="at-text">AT</div>
+
+  <!-- LEFT DIAGONAL PHOTOS -->
+  <div class="photo photo-l1">
+    <!-- Replace src with actual photo path -->
+    <img src="photo1.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-placeholder">Photo 1</div>
+  </div>
+
+  <div class="photo photo-l2">
+    <img src="photo2.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-placeholder">Photo 2</div>
+  </div>
+
+  <div class="photo photo-l3">
+    <img src="photo3.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-placeholder">Photo 3</div>
+  </div>
+
+  <!-- RIGHT DIAGONAL PHOTOS -->
+  <div class="photo photo-r1">
+    <img src="photo4.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-placeholder">Photo 4</div>
+  </div>
+
+  <div class="photo photo-r2">
+    <img src="photo5.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-placeholder">Photo 5</div>
+  </div>
+
+  <div class="photo photo-r3">
+    <img src="photo6.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="photo-placeholder">Photo 6</div>
+  </div>
+
+  <!-- DSU Logo (center) -->
+  <div class="dsu-logo">
+    <svg viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer circle -->
+      <circle cx="95" cy="95" r="92" fill="#8b0000" stroke="#fff" stroke-width="3"/>
+      <circle cx="95" cy="95" r="82" fill="none" stroke="#fff" stroke-width="1.5"/>
+      <!-- Curved text top -->
+      <defs>
+        <path id="topArc" d="M 20,95 A 75,75 0 0,1 170,95"/>
+        <path id="botArc" d="M 28,115 A 75,75 0 0,0 162,115"/>
+      </defs>
+      <text fill="#fff" font-size="14" font-family="Arial" font-weight="700" letter-spacing="3">
+        <textPath href="#topArc" startOffset="8%">DHA SUFFA UNIVERSITY</textPath>
+      </text>
+      <!-- Sunburst -->
+      <g transform="translate(95,75)">
+        <g stroke="#f5c800" stroke-width="2.5" opacity="0.95">
+          <line x1="0" y1="-28" x2="0" y2="-38"/>
+          <line x1="14" y1="-24" x2="19" y2="-32" transform="rotate(25)"/>
+          <line x1="14" y1="-24" x2="19" y2="-32" transform="rotate(50)"/>
+          <line x1="14" y1="-24" x2="19" y2="-32" transform="rotate(75)"/>
+          <line x1="14" y1="-24" x2="19" y2="-32" transform="rotate(100)"/>
+          <line x1="14" y1="-24" x2="19" y2="-32" transform="rotate(130)"/>
+          <line x1="14" y1="-24" x2="19" y2="-32" transform="rotate(155)"/>
+          <line x1="14" y1="-24" x2="19" y2="-32" transform="rotate(180)"/>
+          <line x1="0" y1="-28" x2="0" y2="-38" transform="rotate(-25)"/>
+          <line x1="0" y1="-28" x2="0" y2="-38" transform="rotate(-50)"/>
+          <line x1="0" y1="-28" x2="0" y2="-38" transform="rotate(-75)"/>
+          <line x1="0" y1="-28" x2="0" y2="-38" transform="rotate(-100)"/>
+          <line x1="0" y1="-28" x2="0" y2="-38" transform="rotate(-130)"/>
+          <line x1="0" y1="-28" x2="0" y2="-38" transform="rotate(-155)"/>
+        </g>
+        <circle cx="0" cy="0" r="20" fill="#f5c800" opacity="0.9"/>
+        <!-- Open book -->
+        <g transform="translate(0,5)">
+          <path d="M-12,-10 Q0,-14 0,-10 L0,8 Q0,10 -2,10 L-14,10 Q-16,10 -16,8 Z" fill="#fff" opacity="0.95"/>
+          <path d="M12,-10 Q0,-14 0,-10 L0,8 Q0,10 2,10 L14,10 Q16,10 16,8 Z" fill="#fff" opacity="0.95"/>
+          <line x1="0" y1="-10" x2="0" y2="10" stroke="#8b0000" stroke-width="1.2"/>
+        </g>
+      </g>
+      <!-- Stars at bottom of emblem -->
+      <text x="62" y="158" fill="#fff" font-size="14" font-family="Arial">★</text>
+      <text x="118" y="158" fill="#fff" font-size="14" font-family="Arial">★</text>
+      <!-- DSU text -->
+      <text x="95" y="152" fill="#fff" font-size="18" font-family="Arial" font-weight="700" text-anchor="middle" letter-spacing="2">DSU</text>
+      <!-- Bottom curved text -->
+      <text fill="#fff" font-size="10.5" font-family="Arial" font-weight="600" letter-spacing="1.5">
+        <textPath href="#botArc" startOffset="18%">LEARN TO DISCOVER</textPath>
+      </text>
+    </svg>
+  </div>
+
+  <!-- University Name -->
+  <div class="uni-name">
+    <div class="uni-main">DHA SUFFA<br>UNIVERSITY</div>
+    <div class="uni-sub">Career Fair 2026</div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottom-bar">
+    <div class="bottom-item">
+      <div class="bottom-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="20" height="16" rx="3" stroke="#1a0808" stroke-width="2"/>
+          <path d="M2 7l10 7 10-7" stroke="#1a0808" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      info@tafsol.com
+    </div>
+    <div class="bottom-sep"></div>
+    <div class="bottom-item">
+      <div class="bottom-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="9" stroke="#1a0808" stroke-width="2"/>
+          <path d="M2 12h20M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9" stroke="#1a0808" stroke-width="2"/>
+        </svg>
+      </div>
+      www.tafsol.ai
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Make placeholders visible by default when img fails
+document.querySelectorAll('.photo img').forEach(img => {
+  const ph = img.nextElementSibling;
+  if (ph) ph.style.display = 'none';
+  img.addEventListener('error', function() {
+    this.style.display = 'none';
+    if (ph) ph.style.display = 'flex';
+  });
+  img.addEventListener('load', function() {
+    if (ph) ph.style.display = 'none';
+  });
+});
+</script>
+</body>
+</html>
