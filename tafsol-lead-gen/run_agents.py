@@ -11,6 +11,9 @@ AGENTS = {
     "5": ("Quora Agent",               "quora_agent.py"),
     "6": ("LinkedIn Agent",            "linkedin_agent.py"),
     "7": ("Meta Campaign Agent",       "meta_campaign_agent.py"),
+    "8": ("Google Dorks Agent",        "google_dorks_agent.py"),
+    "9": ("LinkedIn Dev Leads",        "linkedin_dev_leads.py"),
+    "L": ("🚀 MASTER LAUNCHER (ALL)",  "launch_all.py"),
 }
 
 def main():
@@ -20,7 +23,8 @@ def main():
     print()
     for key, (name, _) in AGENTS.items():
         print(f"  [{key}] {name}")
-    print("  [A] Run ALL agents")
+    print("  [L] 🚀 MASTER LAUNCHER — sab platforms ek hi Excel mein")
+    print("  [A] Run ALL agents (ek ek karke)")
     print("  [Q] Quit")
     print()
 
