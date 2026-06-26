@@ -11,41 +11,73 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 
 PROFILE_QUERIES = [
+    # Highest buying intent — decision makers actively looking
+    'site:linkedin.com/in "looking for software development company" USA',
+    'site:linkedin.com/in "looking for development agency" USA',
+    'site:linkedin.com/in "looking for offshore developers" USA',
+    'site:linkedin.com/in "dedicated development team" founder OR CEO USA',
+    'site:linkedin.com/in "staff augmentation" "IT" founder OR "operations" USA',
+    'site:linkedin.com/in "digital transformation" "partner" CEO OR founder USA',
+    # Startup / MVP
+    'site:linkedin.com/in "startup" "looking for CTO" OR "technical cofounder" USA',
+    'site:linkedin.com/in "MVP development" founder OR CEO California OR Texas OR "New York"',
+    'site:linkedin.com/in "SaaS founder" "need developers" OR "build product" USA',
+    'site:linkedin.com/in "startup founder" "launch" "app" OR "software" USA 2024 OR 2025',
+    # AI & Automation demand
+    'site:linkedin.com/in "AI automation" "business" CEO OR founder USA',
+    'site:linkedin.com/in "ChatGPT integration" OR "OpenAI integration" CEO OR founder USA',
+    'site:linkedin.com/in "workflow automation" "need" OR "looking" founder USA',
     # Real Estate
     'site:linkedin.com/in "real estate" "CEO" OR "Founder" OR "Owner" USA',
     'site:linkedin.com/in "real estate agency" "founder" Florida OR Texas OR California',
     'site:linkedin.com/in "property management" "CEO" OR "owner" United States',
-    'site:linkedin.com/in "real estate broker" "founder" New York OR Miami OR Chicago',
-    'site:linkedin.com/in "boutique real estate" "CEO" OR "founder"',
-    'site:linkedin.com/in "luxury real estate" "owner" OR "founder" USA',
     'site:linkedin.com/in "commercial real estate" "CEO" OR "managing director" USA',
-    'site:linkedin.com/in "real estate investment" "founder" OR "principal" United States',
+    # Healthcare
+    'site:linkedin.com/in "healthcare" "founder" OR "CEO" "software" OR "app" USA',
+    'site:linkedin.com/in "dental" OR "medical practice" "owner" "software" OR "app" USA',
+    # Legal / Finance
+    'site:linkedin.com/in "law firm" "founder" OR "managing partner" "software" USA',
+    'site:linkedin.com/in "fintech" "founder" OR "CEO" "development" USA',
     # E-commerce / Retail
     'site:linkedin.com/in "ecommerce" "founder" OR "CEO" "Shopify" OR "WooCommerce" USA',
-    'site:linkedin.com/in "online store" "owner" "struggling" OR "scaling" United States',
-    # Healthcare / Clinics
-    'site:linkedin.com/in "dental clinic" OR "medical practice" "owner" USA "website"',
-    'site:linkedin.com/in "physiotherapy" OR "chiropractic" "founder" "digital" USA',
-    # Restaurants / Hospitality
-    'site:linkedin.com/in "restaurant owner" OR "cafe owner" "digital marketing" USA',
-    # SaaS / Startups
-    'site:linkedin.com/in "SaaS founder" "lead generation" OR "customer acquisition" USA',
-    'site:linkedin.com/in "startup founder" "B2B" "website" "conversion" United States',
+    'site:linkedin.com/in "online store" "owner" "scaling" OR "automation" United States',
+    # Construction / Logistics / Manufacturing
+    'site:linkedin.com/in "construction" "CEO" OR "founder" "ERP" OR "software" USA',
+    'site:linkedin.com/in "logistics" "founder" OR "CEO" "automation" OR "software" USA',
+    # Marketing Agencies (white-label potential)
+    'site:linkedin.com/in "marketing agency" "founder" "white label" OR "development" USA',
+    'site:linkedin.com/in "digital agency" "CEO" "outsource" OR "development team" USA',
 ]
 
 POST_QUERIES = [
-    'site:linkedin.com "real estate website" "not getting leads" OR "struggling"',
-    'site:linkedin.com "real estate" "website redesign" OR "need branding"',
-    'site:linkedin.com "real estate agency" "digital marketing" help',
-    'site:linkedin.com "property management" "website" "chatbot" OR "leads"',
-    'site:linkedin.com "real estate" "online presence" improve',
-    'site:linkedin.com "real estate" "AI" OR "chatbot" website 2024 OR 2025',
-    'site:linkedin.com "real estate marketing" "what works" OR "tips"',
-    'site:linkedin.com "ecommerce" "website conversion" "not converting" help',
-    'site:linkedin.com "small business" "website" "getting no leads" OR "zero inquiries"',
-    'site:linkedin.com "startup" "lead generation" "struggling" OR "problem"',
-    'site:linkedin.com "B2B" "cold outreach" "not working" OR "low response"',
-    'site:linkedin.com "digital marketing" "ROI" "not seeing results" 2025',
+    # Highest buying intent posts
+    'site:linkedin.com "looking for software development company"',
+    'site:linkedin.com "looking for development agency"',
+    'site:linkedin.com "need a development partner"',
+    'site:linkedin.com "looking for offshore developers"',
+    'site:linkedin.com "dedicated development team"',
+    'site:linkedin.com "staff augmentation" "looking" OR "need"',
+    'site:linkedin.com "software outsourcing" "partner"',
+    'site:linkedin.com "CTO as a Service" OR "fractional CTO"',
+    # Startup signals
+    'site:linkedin.com "build MVP" "looking" OR "need developer"',
+    'site:linkedin.com "startup" "looking for technical cofounder"',
+    'site:linkedin.com "launch SaaS" "need developers" OR "looking"',
+    # AI & Automation
+    'site:linkedin.com "ChatGPT integration" "business" "looking" OR "need"',
+    'site:linkedin.com "AI automation" "need developer" OR "looking for"',
+    'site:linkedin.com "OpenAI integration" "need" OR "looking" 2025',
+    # Hiring signals (companies that might outsource)
+    'site:linkedin.com "hiring MERN developer" OR "hiring React developer" USA',
+    'site:linkedin.com "hiring full stack developer" "remote" OR "contract" USA',
+    'site:linkedin.com "hiring Flutter developer" OR "hiring React Native developer"',
+    'site:linkedin.com "urgent hiring developer" OR "immediate hiring developer"',
+    # Industry + software need
+    'site:linkedin.com "healthcare" "need app" OR "need software" OR "build platform"',
+    'site:linkedin.com "real estate" "need website" OR "need app" OR "chatbot"',
+    'site:linkedin.com "e-commerce" "custom development" OR "need developer"',
+    'site:linkedin.com "logistics" "automation" "looking for" developer OR company',
+    'site:linkedin.com "CRM development" OR "ERP development" "looking" OR "need"',
 ]
 
 OUTPUT_PROFILES = "linkedin_profiles.xlsx"

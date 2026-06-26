@@ -11,20 +11,45 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 
 QUORA_SEARCH_QUERIES = [
+    # Highest buying intent — looking for dev company / agency
+    "site:quora.com best software development company USA",
+    "site:quora.com how to find software development company",
+    "site:quora.com how to hire dedicated developers",
+    "site:quora.com best offshore software development company",
+    "site:quora.com how to outsource software development",
+    "site:quora.com staff augmentation software development",
+    "site:quora.com how to find development partner startup",
+    "site:quora.com how to find technical partner startup",
+    # Startup / MVP
+    "site:quora.com how to build MVP startup",
+    "site:quora.com how to find CTO startup",
+    "site:quora.com startup looking for developers where",
+    "site:quora.com how to build SaaS application",
+    "site:quora.com how to hire software team startup",
+    # AI & Automation
+    "site:quora.com ChatGPT integration business website",
+    "site:quora.com AI automation for small business",
+    "site:quora.com how to build AI chatbot for business",
+    "site:quora.com OpenAI integration website how",
+    "site:quora.com workflow automation software development",
+    # Web & App Development
+    "site:quora.com how to build custom CRM software",
+    "site:quora.com how to build mobile app startup",
+    "site:quora.com web application development company USA",
+    "site:quora.com how to build marketplace website",
+    "site:quora.com custom software development benefits",
+    # Real estate
     "site:quora.com real estate website not getting leads",
-    "site:quora.com how to get more real estate clients online",
-    "site:quora.com real estate agency website design tips",
-    "site:quora.com real estate branding importance",
-    "site:quora.com real estate digital marketing strategy",
     "site:quora.com chatbot for real estate website",
-    "site:quora.com how to improve real estate website conversion",
-    "site:quora.com small business website not converting visitors",
-    "site:quora.com how to generate B2B leads online",
-    "site:quora.com website conversion rate optimization tips",
-    "site:quora.com how to get clients for web development agency",
-    "site:quora.com AI chatbot for business website benefits",
-    "site:quora.com how to improve online presence small business",
+    "site:quora.com real estate digital marketing strategy",
+    # Industry specific
+    "site:quora.com healthcare software development",
+    "site:quora.com legal software development law firm",
+    "site:quora.com e-commerce custom development",
+    "site:quora.com how to get clients web development agency",
+    # Cold outreach / Agency growth
     "site:quora.com cold email outreach for agency clients",
+    "site:quora.com how to get clients software development company",
 ]
 
 OUTPUT_FILE = "quora_opportunities.xlsx"

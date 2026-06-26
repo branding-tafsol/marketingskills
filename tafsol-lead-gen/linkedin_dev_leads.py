@@ -11,18 +11,57 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 # ─── SEARCH QUERIES — people who NEED developers ──────────────────────────────
 
 NEED_QUERIES = [
+    # Priority 1: Direct outsourcing / agency intent
+    'site:linkedin.com "looking for software development company"',
+    'site:linkedin.com "looking for development agency"',
+    'site:linkedin.com "need a development partner"',
+    'site:linkedin.com "looking for offshore developers"',
+    'site:linkedin.com "dedicated development team" "looking" OR "need"',
+    'site:linkedin.com "staff augmentation" "software" "looking" OR "need"',
+    'site:linkedin.com "software outsourcing" "partner" OR "looking"',
+    'site:linkedin.com "white-label development" OR "white label software"',
+    'site:linkedin.com "CTO as a Service" OR "fractional CTO" "looking"',
+    # Priority 2: Startup / MVP signals
+    'site:linkedin.com "startup" "looking for technical cofounder" OR "need CTO"',
+    'site:linkedin.com "build MVP" "need developer" OR "looking for"',
+    'site:linkedin.com "launch SaaS" "need developers" OR "looking for dev"',
+    'site:linkedin.com "startup" "MVP development" "need" OR "hire"',
+    'site:linkedin.com "prototype development" "looking for developer"',
+    # Priority 3: AI & Automation (hot market)
+    'site:linkedin.com "ChatGPT integration" "need developer" OR "looking for"',
+    'site:linkedin.com "OpenAI integration" "need" OR "looking" 2025',
+    'site:linkedin.com "AI automation" "need developer" OR "looking for company"',
+    'site:linkedin.com "workflow automation" "need developer" OR "build"',
+    'site:linkedin.com "AI agent" "looking for developer" OR "need to build"',
+    'site:linkedin.com "LLM application" "need developer" OR "build"',
+    # Priority 4: Custom software / platform
+    'site:linkedin.com "CRM development" OR "custom CRM" "need" OR "looking for"',
+    'site:linkedin.com "ERP development" OR "custom ERP" "need" OR "looking for"',
+    'site:linkedin.com "marketplace development" "need developer" OR "looking for"',
+    'site:linkedin.com "web application" "need developer" OR "looking for company"',
+    'site:linkedin.com "mobile app development" "need" OR "looking for developer"',
+    # Priority 5: Tech stack hiring (companies that may outsource)
     'site:linkedin.com "looking for" "MERN developer" "hire" OR "need" OR "urgent"',
     'site:linkedin.com "need a" "Laravel developer" "project" OR "urgent" OR "hire"',
     'site:linkedin.com "looking for" "full stack developer" "urgent" OR "immediately"',
-    'site:linkedin.com "require" "React developer" OR "Node.js developer" "hire"',
     'site:linkedin.com "hiring" "MERN stack" developer "remote" OR "freelance"',
-    'site:linkedin.com "need" "PHP Laravel developer" "project" OR "budget"',
     'site:linkedin.com "looking for" "React Native developer" "app" "hire"',
     'site:linkedin.com "urgent requirement" developer "MERN" OR "Laravel" OR "fullstack"',
+    'site:linkedin.com "hiring Flutter developer" OR "hiring React Native" USA',
+    'site:linkedin.com "hiring Python developer" OR "hiring AI developer" remote',
+    'site:linkedin.com "hiring Node.js developer" OR "hiring backend developer" USA',
+    # Priority 6: Problem-based / asking community
+    'site:linkedin.com "anyone know" "good developer" OR "good software company"',
+    'site:linkedin.com "recommend" "software development company" OR "development agency"',
+    'site:linkedin.com "need help" "build app" OR "build website" OR "build software"',
     'site:linkedin.com "DM me" "developer" "MERN" OR "Laravel" OR "React" "need"',
-    'site:linkedin.com "anyone know" "good developer" "MERN" OR "Laravel" OR "React"',
-    'site:linkedin.com "recommend" "developer" "MERN" OR "fullstack" OR "Laravel"',
-    'site:linkedin.com "need help" "website" "developer" "urgent" OR "ASAP"',
+    # Priority 7: Industry + development
+    'site:linkedin.com "healthcare" "app development" "need" OR "looking for"',
+    'site:linkedin.com "real estate" "app" OR "software" "need developer" OR "looking"',
+    'site:linkedin.com "fintech" "need developers" OR "looking for dev team"',
+    'site:linkedin.com "logistics" "automation software" "need" OR "looking for"',
+    'site:linkedin.com "e-commerce" "custom development" "need" OR "looking"',
+    'site:linkedin.com "legal" OR "law firm" "software" "need developer" OR "looking"',
 ]
 
 OUTPUT_FILE = "linkedin_dev_leads.xlsx"

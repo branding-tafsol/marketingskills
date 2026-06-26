@@ -11,25 +11,47 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 # ─── SEARCH QUERIES ───────────────────────────────────────────────────────────
 
 SEARCH_QUERIES = [
-    # Real estate pain points
-    "site:reddit.com realestate website not getting leads help",
-    "site:reddit.com realestate branding website redesign help",
-    "site:reddit.com realestate digital marketing strategy 2024 OR 2025",
-    "site:reddit.com PropertyManagement website design leads generation",
-    "site:reddit.com RealEstateAgents chatbot AI website clients",
-    "site:reddit.com realestateinvesting marketing online presence improve",
-    "site:reddit.com smallbusiness real estate website struggling conversions",
-    "site:reddit.com realestate SEO website traffic leads",
-    "site:reddit.com realestate social media marketing not working",
-    "site:reddit.com entrepreneur real estate agency website tips",
-    # Broader small business / agency pain points
-    "site:reddit.com smallbusiness website not converting visitors",
-    "site:reddit.com Entrepreneur website leads zero inquiry help",
-    "site:reddit.com startups B2B lead generation struggling cold outreach",
-    "site:reddit.com marketing website conversion rate improve tips",
-    "site:reddit.com freelance agency website clients dry spell",
-    "site:reddit.com ecommerce website not getting sales chatbot help",
-    "site:reddit.com agency clients how to get online 2025",
+    # Highest buying intent — looking for dev company / agency
+    "site:reddit.com \"looking for software development company\"",
+    "site:reddit.com \"looking for development agency\"",
+    "site:reddit.com \"recommend software development company\"",
+    "site:reddit.com \"recommend web developer\" OR \"recommend app developer\"",
+    "site:reddit.com \"software outsourcing\" recommend",
+    "site:reddit.com \"offshore developers\" recommend OR experience",
+    "site:reddit.com \"dedicated development team\" looking OR need",
+    "site:reddit.com \"staff augmentation\" software experience",
+    "site:reddit.com \"looking for development partner\" OR \"need development partner\"",
+    # Startup / MVP signals
+    "site:reddit.com startup \"looking for developers\" OR \"need developers\"",
+    "site:reddit.com \"build MVP\" \"need developer\" OR \"hire developer\"",
+    "site:reddit.com \"startup\" \"technical cofounder\" OR \"CTO\" looking",
+    "site:reddit.com \"SaaS\" \"need developer\" OR \"build SaaS\" help",
+    "site:reddit.com \"launch app\" \"need developer\" OR \"who can build\"",
+    "site:reddit.com \"prototype\" \"need developer\" OR \"who builds\"",
+    # AI & Automation demand
+    "site:reddit.com \"ChatGPT integration\" business \"need developer\" OR \"who can\"",
+    "site:reddit.com \"AI automation\" business \"looking for\" developer OR company",
+    "site:reddit.com \"OpenAI integration\" \"need help\" OR \"hire developer\"",
+    "site:reddit.com \"workflow automation\" \"need developer\" OR \"software company\"",
+    "site:reddit.com \"AI agent\" \"build\" \"looking for\" developer OR company",
+    # Problem-based — need software
+    "site:reddit.com \"need a developer\" OR \"need software team\"",
+    "site:reddit.com \"who can build my app\" OR \"who can develop\"",
+    "site:reddit.com \"where to hire developers\" OR \"how to hire developers\"",
+    "site:reddit.com \"need CRM\" OR \"need ERP\" \"developer\" OR \"company\"",
+    "site:reddit.com \"custom software\" \"looking\" OR \"need\" OR \"recommendation\"",
+    # Industry specific
+    "site:reddit.com healthcare \"need app\" OR \"need software\" developer",
+    "site:reddit.com realestate \"need website\" OR \"need app\" OR \"need developer\"",
+    "site:reddit.com ecommerce \"custom development\" OR \"need developer\" help",
+    "site:reddit.com legaltech OR lawfirm \"software\" \"looking\" OR \"need\"",
+    "site:reddit.com fintech \"need developers\" OR \"looking for dev team\"",
+    "site:reddit.com construction \"ERP\" OR \"software\" \"need\" OR \"recommend\"",
+    "site:reddit.com logistics \"automation\" \"need developer\" OR \"software company\"",
+    # General pain points
+    "site:reddit.com smallbusiness \"website not converting\" OR \"no leads from website\"",
+    "site:reddit.com Entrepreneur \"website\" \"leads\" \"struggling\" OR \"not working\"",
+    "site:reddit.com startups \"need technical partner\" OR \"looking for tech team\"",
 ]
 
 OUTPUT_FILE = "reddit_leads.xlsx"
