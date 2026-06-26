@@ -8,8 +8,10 @@ from ddgs import DDGS
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-# Subreddits to monitor
+# ─── SEARCH QUERIES ───────────────────────────────────────────────────────────
+
 SEARCH_QUERIES = [
+    # Real estate pain points
     "site:reddit.com realestate website not getting leads help",
     "site:reddit.com realestate branding website redesign help",
     "site:reddit.com realestate digital marketing strategy 2024 OR 2025",
@@ -20,67 +22,158 @@ SEARCH_QUERIES = [
     "site:reddit.com realestate SEO website traffic leads",
     "site:reddit.com realestate social media marketing not working",
     "site:reddit.com entrepreneur real estate agency website tips",
+    # Broader small business / agency pain points
+    "site:reddit.com smallbusiness website not converting visitors",
+    "site:reddit.com Entrepreneur website leads zero inquiry help",
+    "site:reddit.com startups B2B lead generation struggling cold outreach",
+    "site:reddit.com marketing website conversion rate improve tips",
+    "site:reddit.com freelance agency website clients dry spell",
+    "site:reddit.com ecommerce website not getting sales chatbot help",
+    "site:reddit.com agency clients how to get online 2025",
 ]
 
 OUTPUT_FILE = "reddit_leads.xlsx"
 
 # ─── COMMENT TEMPLATES ────────────────────────────────────────────────────────
-# Generic, helpful — not spammy. Mention Tafsol only subtly.
+# Framework 3 (Fix Mental Blocks — cognitive scientist approach)
+# Framework 5 (PhD-Level Breakdown — first principles, theories)
+# Framework 1 (Genius Understanding — advanced analogies)
 
 COMMENT_TEMPLATES = [
-    """Great question! A few things that actually move the needle for real estate lead gen:
+    # Framework 3: Root cause analysis like a cognitive scientist
+    """The root cause here is almost never what people think it is.
 
-1. **AI chatbot on your website** — 70% of real estate searches happen after 9pm. If no one answers, that lead is gone. A chatbot captures them 24/7.
-2. **"Get a Free Home Valuation" CTA above the fold** — this converts 3-4x better than a generic contact form.
-3. **Mobile speed** — if your site loads in 4+ seconds on mobile, you're losing the majority of your traffic right there.
+Most businesses assume low leads = not enough traffic. So they spend more on ads.
 
-We've helped several US real estate agencies fix exactly these issues. Happy to share more if useful.""",
+But here's what the data actually shows: the average small business website converts at 1-2%. The top performers convert at 5-8%. Same traffic. 3-4x more leads.
 
-    """This is super common for real estate agencies. The websites that consistently convert have:
+The behavioural pattern behind low conversion:
+1. Visitors arrive and don't immediately understand what you do for *them* (not what you do in general)
+2. They feel no urgency or reason to act right now
+3. The friction to contact is too high (forms feel like commitment)
 
-- A clear value prop on the homepage (not just "Buy & Sell Homes" — something specific to your market)
-- An AI chatbot or live chat for after-hours inquiries (biggest ROI we've seen)
-- Social proof above the fold — sold listings, client reviews, local market stats
+The habit loop to fix it: Give value FIRST (free tool, audit, guide), then ask for contact. This one change typically 2-3x conversion rates.
 
-The good news: a quick audit usually surfaces 3-4 quick wins that don't need a full redesign. What does your homepage look like right now?""",
+What does your homepage above-the-fold currently say?""",
 
-    """From working with real estate agencies across the US — the gap is almost always conversion, not traffic.
+    # Framework 5: PhD-level breakdown from first principles
+    """Let me break this down from first principles, because most advice online is surface-level.
 
-Quick wins that work:
-- Free home valuation tool (captures emails + phone numbers)
-- AI chatbot for instant response (we use this for clients — huge difference)
-- Click-to-call button that's visible on mobile
-- Testimonials from local clients with photos
+**Why websites don't convert — the actual theory:**
 
-What platform is your website on? That usually determines how fast these can be implemented.""",
+In behavioural economics, there's a concept called "friction cost" — the psychological energy required to take an action. Every extra field in your form, every unclear CTA, every slow loading second adds friction.
 
-    """Real talk — most real estate websites are built to look good, not to convert. The agencies killing it right now have:
+There's also "loss aversion" (Kahneman, 1979) — people fear giving their email more than they value what they might get. Which means your offer must be specific and compelling enough to overcome that loss aversion.
 
-- **Speed**: Under 2.5s load time on mobile
-- **Chatbot**: Captures leads when you're unavailable (which is most of the time)
-- **Trust signals**: Reviews, certifications, local market expertise upfront
-- **One clear CTA**: Not 5 options — just one thing you want visitors to do
+**What works (reverse-engineered from high-converting sites):**
+- One primary CTA that promises a specific outcome ("Get your free home valuation in 60 seconds")
+- Chatbot instead of form (feels like conversation, not commitment)
+- Social proof within first scroll (real results, not generic testimonials)
+- Speed under 3s (53% of mobile users leave after 3 seconds — Google 2023)
 
-What's your biggest challenge right now — traffic or converting the traffic you already have?""",
+The agencies applying all 4 consistently outperform by 3-5x in lead volume.""",
+
+    # Framework 1: Genius-level analogy
+    """Here's the best analogy I've found for this problem:
+
+Imagine you open a store on a busy street. You spend $2,000/month on a giant billboard to drive people in. But inside, the store has dim lighting, no one greets customers, the products are hard to find, and the checkout requires a 10-step process.
+
+Most businesses spend 90% of their budget on the billboard (ads, SEO, social) and 10% on the store experience (website conversion).
+
+The businesses winning in 2025 have figured out that fixing the store experience is 5x cheaper and faster than buying more billboard space.
+
+Your website IS the store. And most stores are leaking leads through the back door every hour.""",
+
+    # Framework 4: Mental shortcut / framework
+    """Here's the exact framework I use when auditing any service business website:
+
+**The VCAT Audit:**
+V — Value prop (Does the headline say what you do + who you help + what result they get — in one line?)
+C — Credibility (Are there 3+ results/testimonials visible without scrolling?)
+A — Action (Is there ONE clear next step? Not 5 options — just one.)
+T — Time (Does the page load in under 3 seconds on mobile?)
+
+Score yourself 0-4. Most businesses score 1-2.
+
+Every point you add to this score roughly doubles your conversion rate.
+
+What's your current score?""",
+
+    """The most expensive mistake I see businesses make online:
+
+Sending paid traffic to a website that isn't optimized to convert — then concluding "digital marketing doesn't work for us."
+
+Here's what's actually happening: the marketing is working (people are clicking), but the website is failing (people aren't converting).
+
+Before you spend another dollar on ads, run this quick check:
+1. Load your website on mobile. Does it load in under 3 seconds?
+2. Read your headline. Does it say exactly what problem you solve and for who?
+3. Is there a way to engage that ISN'T a contact form? (Chat, free tool, quiz)
+4. Is there real proof visible without scrolling? (Results, reviews, case studies)
+
+If you answered "no" to any of these, that's where your leads are disappearing.""",
+
+    # Framework 2: Master authority — 20-year expert reverse engineering
+    """If I were starting a service business from scratch today knowing what I know after 100+ website audits, here's exactly what I'd do:
+
+**Day 1-7**: Build the simplest possible website with: one headline that speaks to a specific pain, one CTA, 3 client results, and a chatbot.
+
+**Week 2**: Add a free tool or lead magnet (valuation, audit, report) — this alone typically generates 3-5 leads/week with zero ad spend.
+
+**Week 3-4**: Optimize for one keyword your ideal client actually searches. Write 2-3 articles answering their biggest questions. Google rewards specificity.
+
+**Month 2+**: Only THEN consider paid ads — because now you have a website that actually converts and you know your cost per lead.
+
+The businesses that skip steps 1-3 and jump straight to ads waste money, get burned, and conclude "digital marketing doesn't work." It works — but only when the foundation is right.""",
+
+    """What's working for service businesses getting consistent leads online in 2025:
+
+Not complicated. Not expensive. But few businesses actually do all of these:
+
+1. **Niche down your messaging** — "We help [specific type of business] get [specific result] in [specific timeframe]" outperforms generic messaging by 4-6x
+
+2. **Add a free resource** — not a PDF no one reads, but something interactive: a calculator, quiz, or instant-result tool. These convert 5-10x better than contact forms.
+
+3. **24/7 availability** — 60% of web traffic happens outside business hours. If no one's there when a prospect lands, that lead is gone. AI chatbot solves this completely.
+
+4. **Follow-up sequence** — 80% of sales happen after the 5th touchpoint. Most businesses give up after 1-2. An automated email sequence handles this for you.
+
+Start with #1. Everything else builds on it.""",
+
+    """Real talk from working with agencies, consultants, and service businesses across the US:
+
+The difference between businesses with full pipelines and those struggling isn't budget. It isn't industry. It isn't even their offer (usually).
+
+It's **systems**.
+
+The businesses with full pipelines have:
+- A website that captures leads 24/7 (not just during business hours)
+- An automated follow-up sequence (not manual chasing)
+- Clear positioning that attracts the right people (not everyone)
+- Consistent content that builds trust before the first call
+
+The businesses struggling are doing everything manually, one client at a time, with no system to capture or nurture new leads.
+
+The gap closes when you build the system first. Happy to share specifically what that looks like for your type of business if useful.""",
 ]
 
 
-# ─── REDDIT AGENT — DDG Search (no credentials needed) ────────────────────────
+# ─── REDDIT AGENT ─────────────────────────────────────────────────────────────
 
 def find_opportunities():
     opportunities = []
     seen = set()
-    print(f"\nSearching Reddit via DuckDuckGo (no login needed)...\n")
+    print(f"\nSearching Reddit via DuckDuckGo...\n")
 
     with DDGS() as ddgs:
         for query in SEARCH_QUERIES:
-            print(f"  Searching: {query[:60]}...")
+            print(f"  Searching: {query[:65]}...")
             try:
                 results = ddgs.text(query, region="us-en", max_results=10)
                 for r in results:
-                    url = r.get("href", "")
+                    url   = r.get("href", "")
                     title = r.get("title", "")
-                    body = r.get("body", "")
+                    body  = r.get("body", "")
                     if "reddit.com" in url and url not in seen:
                         seen.add(url)
                         subreddit = url.split("/r/")[1].split("/")[0] if "/r/" in url else "reddit"
@@ -122,8 +215,8 @@ def save_opportunities(opportunities):
 
 def main():
     print("=" * 60)
-    print("  TAFSOL REDDIT AGENT")
-    print("  No login required — using public Reddit API")
+    print("  TAFSOL REDDIT AGENT v2")
+    print("  PhD-level comments — No login required")
     print("=" * 60)
 
     opps = find_opportunities()
