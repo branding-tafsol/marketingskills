@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tafsol — 4th of July</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  width:1080px; height:1080px;
+  overflow:hidden;
+  background:#000;
+}
+
+.canvas {
+  width:1080px; height:1080px;
+  position:relative;
+  overflow:hidden;
+  background: radial-gradient(ellipse at 50% 30%, #0d2f6e 0%, #071428 50%, #000000 100%);
+}
+
+/* ── ANIMATED BG GRADIENT ── */
+@keyframes bgPulse {
+  0%,100% { background: radial-gradient(ellipse at 50% 30%, #0d2f6e 0%, #071428 55%, #000 100%); }
+  50% { background: radial-gradient(ellipse at 50% 20%, #163a8a 0%, #091830 55%, #000 100%); }
+}
+.bg-anim { position:absolute;inset:0; animation:bgPulse 4s ease-in-out infinite; }
+
+/* ── STARS FIELD ── */
+.stars-field { position:absolute;inset:0; }
+.star-dot {
+  position:absolute;
+  border-radius:50%;
+  background:white;
+  animation:twinkle linear infinite;
+}
+@keyframes twinkle {
+  0%,100%{opacity:0.2;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.5);}
+}
+
+/* ── AURORA GLOW ── */
+.aurora {
+  position:absolute;
+  width:900px; height:500px;
+  border-radius:50%;
+  top:-100px; left:50%;
+  transform:translateX(-50%);
+  background: radial-gradient(ellipse, rgba(30,100,255,0.25) 0%, rgba(180,20,50,0.12) 40%, transparent 70%);
+  animation:auroraPulse 3s ease-in-out infinite;
+  filter:blur(40px);
+}
+@keyframes auroraPulse {
+  0%,100%{opacity:0.7;transform:translateX(-50%) scaleY(1);}
+  50%{opacity:1;transform:translateX(-50%) scaleY(1.15);}
+}
+
+/* ── FIREWORKS ── */
+.fw-container { position:absolute;inset:0;pointer-events:none; }
+
+@keyframes fwShoot {
+  0%   { transform:translateY(0) scaleY(1); opacity:1; }
+  100% { transform:translateY(-500px) scaleY(0.3); opacity:0; }
+}
+.fw-trail {
+  position:absolute;
+  width:3px; border-radius:2px;
+  animation:fwShoot linear forwards;
+}
+
+@keyframes fwBurst {
+  0%   { transform:scale(0); opacity:1; }
+  40%  { opacity:1; }
+  100% { transform:scale(1); opacity:0; }
+}
+.fw-burst {
+  position:absolute;
+  width:8px; height:8px;
+  border-radius:50%;
+  animation:fwBurst ease-out forwards;
+}
+
+/* CSS Firework using box-shadow spread */
+.fw {
+  position:absolute;
+  width:6px; height:6px;
+  border-radius:50%;
+  animation:fwExplode ease-out infinite;
+}
+
+@keyframes fwExplode {
+  0% {
+    transform:scale(0) rotate(0deg);
+    opacity:1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  10% { opacity:1; transform:scale(0.5); }
+  60% {
+    opacity:0.9;
+    transform:scale(1) rotate(5deg);
+    box-shadow:
+      0px -90px 0 0 currentColor,
+      63px -63px 0 0 currentColor,
+      90px 0px 0 0 currentColor,
+      63px 63px 0 0 currentColor,
+      0px 90px 0 0 currentColor,
+      -63px 63px 0 0 currentColor,
+      -90px 0px 0 0 currentColor,
+      -63px -63px 0 0 currentColor,
+      0px -130px 0 0 currentColor,
+      92px -92px 0 0 currentColor,
+      130px 0px 0 0 currentColor,
+      92px 92px 0 0 currentColor,
+      0px 130px 0 0 currentColor,
+      -92px 92px 0 0 currentColor,
+      -130px 0px 0 0 currentColor,
+      -92px -92px 0 0 currentColor;
+  }
+  100% {
+    opacity:0;
+    transform:scale(1.2) rotate(10deg);
+    box-shadow:
+      0px -160px 0 0 currentColor,
+      113px -113px 0 0 currentColor,
+      160px 0px 0 0 currentColor,
+      113px 113px 0 0 currentColor,
+      0px 160px 0 0 currentColor,
+      -113px 113px 0 0 currentColor,
+      -160px 0px 0 0 currentColor,
+      -113px -113px 0 0 currentColor,
+      0px -200px 0 0 transparent,
+      142px -142px 0 0 transparent,
+      200px 0px 0 0 transparent,
+      142px 142px 0 0 transparent;
+  }
+}
+
+/* ── SHOOTING STARS ── */
+.shooting-star {
+  position:absolute;
+  height:2px;
+  background:linear-gradient(90deg, white, transparent);
+  border-radius:2px;
+  animation:shoot linear infinite;
+}
+@keyframes shoot {
+  0% { transform:translateX(-200px) translateY(0) rotate(-30deg); opacity:1; }
+  100% { transform:translateX(1300px) translateY(200px) rotate(-30deg); opacity:0; }
+}
+
+/* ── AMERICAN FLAG ── */
+.flag-wrap {
+  position:absolute;
+  top:-20px; right:-20px;
+  width:380px; height:260px;
+  opacity:0.28;
+  animation:flagWave 3s ease-in-out infinite;
+  transform-origin:left center;
+  overflow:hidden;
+  border-radius:4px;
+}
+@keyframes flagWave {
+  0%,100%{clip-path:polygon(0 0,100% 3%,100% 97%,0 100%);}
+  25%{clip-path:polygon(0 0,100% 0%,100% 100%,0 97%);}
+  50%{clip-path:polygon(0 3%,100% 0%,100% 97%,0 100%);}
+  75%{clip-path:polygon(0 0%,100% 3%,100% 97%,0 100%);}
+}
+
+/* ── GRID LINES ── */
+.grid {
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(30,80,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(30,80,255,0.04) 1px,transparent 1px);
+  background-size:54px 54px;
+}
+
+/* ── CIRCUIT GLOW ── */
+.circuit-svg { position:absolute;inset:0;opacity:0.2; }
+@keyframes circuitFlow {
+  0%,100%{opacity:0.15;}
+  50%{opacity:0.35;}
+}
+.circuit-svg { animation:circuitFlow 3s ease-in-out infinite; }
+
+/* ── PARTICLES ── */
+.particle {
+  position:absolute;
+  border-radius:50%;
+  animation:particleFloat linear infinite;
+}
+@keyframes particleFloat {
+  0%  {transform:translateY(0) translateX(0);opacity:0;}
+  10% {opacity:1;}
+  90% {opacity:0.7;}
+  100%{transform:translateY(-200px) translateX(30px);opacity:0;}
+}
+
+/* ── NYC SKYLINE ── */
+.skyline-wrap {
+  position:absolute;
+  bottom:0;left:0;right:0;
+  animation:skylineGlow 4s ease-in-out infinite;
+}
+@keyframes skylineGlow {
+  0%,100%{filter:drop-shadow(0 0 8px rgba(30,100,255,0.3));}
+  50%{filter:drop-shadow(0 0 20px rgba(30,100,255,0.6));}
+}
+
+/* ── LIBERTY ── */
+.liberty-wrap {
+  position:absolute;
+  bottom:110px; right:90px;
+  animation:libertyGlow 3s ease-in-out infinite;
+}
+@keyframes libertyGlow {
+  0%,100%{opacity:0.1;filter:drop-shadow(0 0 10px rgba(30,150,255,0));}
+  50%{opacity:0.2;filter:drop-shadow(0 0 20px rgba(30,150,255,0.5));}
+}
+
+/* ── LEFT ACCENT ── */
+.left-bar {
+  position:absolute;
+  left:55px; top:300px;
+  width:4px; height:340px;
+  background:linear-gradient(180deg,transparent,#E82040,#E82040,transparent);
+  border-radius:4px;
+  animation:barGlow 2s ease-in-out infinite;
+}
+@keyframes barGlow {
+  0%,100%{box-shadow:0 0 8px #E82040,0 0 20px rgba(232,32,64,0.3);}
+  50%{box-shadow:0 0 16px #E82040,0 0 40px rgba(232,32,64,0.6);}
+}
+
+/* ── BOTTOM LINE ── */
+.bottom-line {
+  position:absolute;
+  bottom:148px;left:55px;right:55px;height:1px;
+  background:linear-gradient(90deg,#E82040 0%,rgba(232,32,64,0.3) 50%,transparent 100%);
+  animation:lineGlow 2s ease-in-out infinite;
+}
+@keyframes lineGlow {
+  0%,100%{opacity:0.6;}
+  50%{opacity:1;box-shadow:0 0 10px #E82040;}
+}
+
+/* ── CONTENT ── */
+.content {
+  position:absolute;inset:0;
+  padding:55px 75px 52px 88px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+
+/* Eyebrow */
+.eyebrow {
+  font:600 12px/1 'Inter',sans-serif;
+  letter-spacing:5px;
+  color:#C8A84B;
+  text-transform:uppercase;
+  margin-bottom:16px;
+  animation:fadeSlideDown 0.8s ease forwards;
+}
+
+/* Date pill */
+.date-pill {
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(232,32,64,0.5);
+  border-radius:40px;
+  padding:8px 22px;
+  margin-bottom:28px;
+  background:rgba(232,32,64,0.08);
+  animation:pillPulse 2s ease-in-out infinite;
+}
+@keyframes pillPulse {
+  0%,100%{border-color:rgba(232,32,64,0.4);box-shadow:0 0 0 rgba(232,32,64,0);}
+  50%{border-color:rgba(232,32,64,0.9);box-shadow:0 0 20px rgba(232,32,64,0.2);}
+}
+.date-pill .pulse-dot {
+  width:7px;height:7px;border-radius:50%;
+  background:#E82040;
+  animation:dotPulse 1.4s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.5);opacity:0.4;}
+}
+.date-pill span {
+  font:700 12px/1 'Inter',sans-serif;
+  letter-spacing:3.5px;
+  color:#ff4466;
+  text-transform:uppercase;
+}
+
+/* Stars */
+.star-row { display:flex;gap:6px;margin-bottom:24px; }
+.star-row i {
+  font-style:normal;
+  color:#C8A84B;
+  font-size:18px;
+  animation:starSpin 4s linear infinite;
+  display:inline-block;
+}
+@keyframes starSpin {
+  0%{transform:rotate(0);}
+  100%{transform:rotate(360deg);}
+}
+.star-row i:nth-child(1){animation-delay:0s;}
+.star-row i:nth-child(2){animation-delay:0.4s;}
+.star-row i:nth-child(3){animation-delay:0.8s;}
+.star-row i:nth-child(4){animation-delay:1.2s;}
+.star-row i:nth-child(5){animation-delay:1.6s;}
+
+/* Headline */
+.headline {
+  font-family:'Playfair Display',serif;
+  font-weight:900;
+  line-height:0.88;
+  margin-bottom:20px;
+  position:relative;
+}
+.h-happy {
+  font-size:82px;
+  color:#fff;
+  text-shadow:0 0 40px rgba(100,160,255,0.5),0 0 80px rgba(100,160,255,0.2);
+  display:block;
+  animation:textGlow 3s ease-in-out infinite;
+}
+@keyframes textGlow {
+  0%,100%{text-shadow:0 0 30px rgba(100,160,255,0.4),0 0 60px rgba(100,160,255,0.15);}
+  50%{text-shadow:0 0 50px rgba(100,160,255,0.8),0 0 100px rgba(100,160,255,0.3),0 0 150px rgba(100,160,255,0.1);}
+}
+.h-4th {
+  font-size:58px;
+  color:rgba(255,255,255,0.4);
+  display:inline;
+}
+.h-of {
+  font-size:58px;
+  color:rgba(255,255,255,0.4);
+  display:inline;
+}
+.h-july {
+  font-size:130px;
+  display:block;
+  background:linear-gradient(135deg,#ff2244 0%,#ff6688 40%,#BF0A30 70%,#E82040 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:julyGlow 2.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 20px rgba(232,32,64,0.5));
+}
+@keyframes julyGlow {
+  0%,100%{filter:drop-shadow(0 0 15px rgba(232,32,64,0.4));}
+  50%{filter:drop-shadow(0 0 35px rgba(232,32,64,0.8));}
+}
+
+/* Ghost 4 */
+.ghost-num {
+  position:absolute;
+  font-family:'Playfair Display',serif;
+  font-size:380px;
+  font-weight:900;
+  right:-30px; top:-40px;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,0.04);
+  line-height:1;
+  user-select:none;
+  animation:ghostPulse 4s ease-in-out infinite;
+}
+@keyframes ghostPulse {
+  0%,100%{-webkit-text-stroke:1px rgba(255,255,255,0.03);}
+  50%{-webkit-text-stroke:1px rgba(255,255,255,0.07);}
+}
+
+/* Subtitle */
+.subtitle {
+  font:400 13.5px/1 'Inter',sans-serif;
+  letter-spacing:3.5px;
+  color:rgba(255,255,255,0.4);
+  text-transform:uppercase;
+  margin-bottom:26px;
+  animation:fadeIn 2s ease forwards;
+}
+
+/* Message */
+.message {
+  font:300 14px/1.9 'Inter',sans-serif;
+  color:rgba(255,255,255,0.38);
+  max-width:540px;
+  letter-spacing:0.3px;
+}
+
+/* Divider */
+.divider {
+  display:flex;align-items:center;gap:14px;
+  margin:28px 0 26px;
+}
+.div-line {
+  flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(200,168,75,0.7),rgba(200,168,75,0.1));
+  animation:lineShimmer 3s ease-in-out infinite;
+}
+@keyframes lineShimmer {
+  0%,100%{opacity:0.5;}
+  50%{opacity:1;}
+}
+.div-star { color:#C8A84B;font-size:14px; }
+
+/* Branding */
+.branding { display:flex;align-items:flex-end;justify-content:space-between; }
+
+.logo-block { display:flex;align-items:center;gap:14px; }
+.logo-icon {
+  width:54px;height:54px;
+  background:linear-gradient(135deg,#1040A0,#2060D0);
+  border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  font:900 24px/1 'Playfair Display',serif;
+  color:#fff;
+  animation:logoGlow 3s ease-in-out infinite;
+  box-shadow:0 0 0 rgba(30,80,200,0);
+}
+@keyframes logoGlow {
+  0%,100%{box-shadow:0 0 15px rgba(30,80,200,0.4),0 0 30px rgba(30,80,200,0.15);}
+  50%{box-shadow:0 0 30px rgba(30,80,200,0.8),0 0 60px rgba(30,80,200,0.3);}
+}
+.logo-name {
+  font:700 22px/1.2 'Inter',sans-serif;
+  color:#fff;
+  letter-spacing:0.5px;
+}
+.logo-name span { color:#4a90ff; }
+.logo-tagline {
+  font:400 10px/1 'Inter',sans-serif;
+  letter-spacing:2.5px;
+  color:rgba(255,255,255,0.3);
+  text-transform:uppercase;
+  margin-top:5px;
+}
+
+.social-col { display:flex;flex-direction:column;align-items:flex-end;gap:8px; }
+.social-row { display:flex;gap:8px; }
+.sicon {
+  width:34px;height:34px;
+  border-radius:9px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  display:flex;align-items:center;justify-content:center;
+  font:600 12px/1 'Inter',sans-serif;
+  color:rgba(255,255,255,0.4);
+  transition:all 0.3s;
+  animation:iconPulse 4s ease-in-out infinite;
+}
+@keyframes iconPulse {
+  0%,100%{border-color:rgba(255,255,255,0.08);}
+  50%{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);}
+}
+.sicon:nth-child(1){animation-delay:0s;}
+.sicon:nth-child(2){animation-delay:0.5s;}
+.sicon:nth-child(3){animation-delay:1s;}
+.sicon:nth-child(4){animation-delay:1.5s;}
+.website-txt {
+  font:400 11px/1 'Inter',sans-serif;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.2);
+}
+
+/* Corner dots */
+.corner-dots {
+  position:absolute;top:26px;left:26px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.cdrow{display:flex;gap:5px;}
+.cdot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(200,168,75,0.3);
+  animation:cdotPulse 3s ease-in-out infinite;
+}
+@keyframes cdotPulse{
+  0%,100%{opacity:0.2;}50%{opacity:0.7;}
+}
+.cdot:nth-child(1){animation-delay:0s;}
+.cdot:nth-child(2){animation-delay:0.3s;}
+.cdot:nth-child(3){animation-delay:0.6s;}
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- BG -->
+  <div class="bg-anim"></div>
+  <div class="grid"></div>
+  <div class="aurora"></div>
+
+  <!-- Stars field -->
+  <div class="stars-field" id="starsField"></div>
+
+  <!-- Shooting stars -->
+  <div class="shooting-star" style="width:120px;top:15%;left:-150px;animation-duration:3s;animation-delay:0s;"></div>
+  <div class="shooting-star" style="width:80px;top:8%;left:-100px;animation-duration:4s;animation-delay:1.5s;"></div>
+  <div class="shooting-star" style="width:150px;top:25%;left:-150px;animation-duration:3.5s;animation-delay:2.5s;"></div>
+  <div class="shooting-star" style="width:90px;top:5%;left:-100px;animation-duration:5s;animation-delay:4s;"></div>
+
+  <!-- American Flag -->
+  <div class="flag-wrap" id="flagWrap"></div>
+
+  <!-- Circuit SVG -->
+  <svg class="circuit-svg" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="210" x2="280" y2="210" stroke="#3060FF" stroke-width="1"/>
+    <circle cx="280" cy="210" r="3" fill="#3060FF"/>
+    <line x1="280" y1="210" x2="280" y2="360" stroke="#3060FF" stroke-width="1"/>
+    <circle cx="280" cy="360" r="3" fill="#3060FF"/>
+    <line x1="280" y1="360" x2="480" y2="360" stroke="#3060FF" stroke-width="1"/>
+    <circle cx="480" cy="360" r="5" fill="#3060FF"/>
+    <line x1="100" y1="480" x2="380" y2="480" stroke="#3060FF" stroke-width="1"/>
+    <circle cx="100" cy="480" r="3" fill="#3060FF"/>
+    <line x1="380" y1="480" x2="380" y2="620" stroke="#3060FF" stroke-width="1"/>
+    <circle cx="380" cy="620" r="3" fill="#3060FF"/>
+    <line x1="920" y1="520" x2="720" y2="520" stroke="#FF2244" stroke-width="1"/>
+    <circle cx="720" cy="520" r="3" fill="#FF2244"/>
+    <line x1="720" y1="520" x2="720" y2="700" stroke="#FF2244" stroke-width="1"/>
+    <circle cx="720" cy="700" r="5" fill="#FF2244"/>
+    <line x1="840" y1="320" x2="840" y2="480" stroke="#3060FF" stroke-width="1"/>
+    <circle cx="840" cy="320" r="3" fill="#3060FF"/>
+    <line x1="960" y1="680" x2="810" y2="680" stroke="#FF2244" stroke-width="1"/>
+    <circle cx="810" cy="680" r="3" fill="#FF2244"/>
+    <line x1="810" y1="680" x2="810" y2="820" stroke="#FF2244" stroke-width="1"/>
+    <line x1="180" y1="780" x2="340" y2="780" stroke="#C8A84B" stroke-width="1"/>
+    <circle cx="180" cy="780" r="3" fill="#C8A84B"/>
+    <line x1="340" y1="780" x2="340" y2="880" stroke="#C8A84B" stroke-width="1"/>
+    <circle cx="340" cy="880" r="3" fill="#C8A84B"/>
+  </svg>
+
+  <!-- Fireworks -->
+  <div class="fw-container">
+    <!-- Red fireworks -->
+    <div class="fw" style="top:100px;left:150px;color:#FF2244;animation-duration:2.4s;animation-delay:0s;"></div>
+    <div class="fw" style="top:70px;left:380px;color:#ffffff;animation-duration:2s;animation-delay:0.6s;"></div>
+    <div class="fw" style="top:120px;right:280px;color:#C8A84B;animation-duration:2.8s;animation-delay:1.2s;"></div>
+    <div class="fw" style="top:55px;right:150px;color:#FF2244;animation-duration:2.2s;animation-delay:0.3s;"></div>
+    <div class="fw" style="top:90px;left:600px;color:#4a90ff;animation-duration:3s;animation-delay:1.8s;"></div>
+    <div class="fw" style="top:180px;left:850px;color:#ffffff;animation-duration:2.5s;animation-delay:0.9s;"></div>
+    <div class="fw" style="top:140px;left:200px;color:#C8A84B;animation-duration:2.7s;animation-delay:2.2s;"></div>
+    <div class="fw" style="top:50px;left:700px;color:#FF2244;animation-duration:2.1s;animation-delay:1.5s;"></div>
+    <!-- Smaller accent bursts -->
+    <div class="fw" style="top:200px;right:100px;color:#FF6688;animation-duration:1.8s;animation-delay:2.8s;font-size:4px;transform:scale(0.5);"></div>
+    <div class="fw" style="top:30px;left:450px;color:#88AAFF;animation-duration:2.3s;animation-delay:3.2s;transform:scale(0.6);"></div>
+  </div>
+
+  <!-- Particles -->
+  <div id="particles"></div>
+
+  <!-- NYC Skyline -->
+  <div class="skyline-wrap">
+    <svg viewBox="0 0 1080 230" width="1080" height="230" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+      <defs>
+        <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2060CC" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#0A2060" stop-opacity="0.2"/>
+        </linearGradient>
+      </defs>
+      <g fill="url(#sg)">
+        <rect x="0" y="160" width="38" height="70"/>
+        <rect x="42" y="130" width="28" height="100"/>
+        <rect x="74" y="108" width="48" height="122"/>
+        <rect x="126" y="138" width="33" height="92"/>
+        <rect x="163" y="98" width="24" height="132"/>
+        <!-- One WTC -->
+        <polygon points="192,22 206,22 222,95 185,95"/>
+        <rect x="190" y="95" width="34" height="135"/>
+        <rect x="228" y="118" width="42" height="112"/>
+        <rect x="274" y="135" width="28" height="95"/>
+        <rect x="306" y="82" width="52" height="148"/>
+        <rect x="362" y="125" width="32" height="105"/>
+        <rect x="398" y="98" width="38" height="132"/>
+        <rect x="440" y="148" width="28" height="82"/>
+        <rect x="472" y="72" width="32" height="158"/>
+        <!-- Empire State Building -->
+        <rect x="510" y="145" width="48" height="85"/>
+        <rect x="522" y="105" width="24" height="45"/>
+        <rect x="528" y="65" width="12" height="45"/>
+        <line x1="534" y1="20" x2="534" y2="65" stroke="url(#sg)" stroke-width="3"/>
+        <rect x="562" y="135" width="38" height="95"/>
+        <rect x="604" y="115" width="28" height="115"/>
+        <rect x="636" y="85" width="56" height="145"/>
+        <!-- Chrysler style -->
+        <rect x="696" y="132" width="42" height="98"/>
+        <polygon points="696,132 717,62 738,132"/>
+        <rect x="742" y="125" width="32" height="105"/>
+        <rect x="778" y="105" width="48" height="125"/>
+        <rect x="830" y="145" width="28" height="85"/>
+        <rect x="862" y="118" width="38" height="112"/>
+        <rect x="904" y="135" width="32" height="95"/>
+        <rect x="940" y="102" width="65" height="128"/>
+        <rect x="1010" y="130" width="42" height="100"/>
+        <rect x="1056" y="115" width="30" height="115"/>
+      </g>
+      <!-- Window lights -->
+      <g fill="#88BBFF" opacity="0.3">
+        <rect x="196" y="100" width="4" height="3"/><rect x="204" y="108" width="4" height="3"/>
+        <rect x="314" y="90" width="4" height="3"/><rect x="322" y="100" width="4" height="3"/>
+        <rect x="478" y="80" width="4" height="3"/><rect x="486" y="90" width="4" height="3"/>
+        <rect x="518" y="112" width="4" height="3"/><rect x="526" y="120" width="4" height="3"/>
+        <rect x="700" y="72" width="4" height="3"/><rect x="708" y="82" width="4" height="3"/>
+        <rect x="944" y="110" width="4" height="3"/><rect x="952" y="120" width="4" height="3"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Statue of Liberty -->
+  <div class="liberty-wrap">
+    <svg width="200" height="360" viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg" fill="#3070CC">
+      <polygon points="100,18,92,48,82,43,87,78,77,88,82,98,72,98,77,118,67,128,72,148,62,158,67,178,57,188,67,198,62,218,72,218,67,238,82,238,77,258,97,258,92,360,108,360,103,258,123,258,118,238,133,238,128,218,138,218,133,198,143,188,133,178,138,158,128,148,133,128,123,118,128,98,118,98,123,88,113,78,118,43,108,48"/>
+      <line x1="72" y1="98" x2="42" y2="55" stroke="#3070CC" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="42" cy="44" rx="10" ry="16" opacity="0.9"/>
+      <polygon points="88,18,93,3,98,18,103,0,108,18,113,3,118,18" opacity="0.95"/>
+    </svg>
+  </div>
+
+  <!-- Accent bars -->
+  <div class="left-bar"></div>
+  <div class="bottom-line"></div>
+
+  <!-- Corner dots -->
+  <div class="corner-dots">
+    <div class="cdrow"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>
+    <div class="cdrow"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>
+    <div class="cdrow"><div class="cdot"></div><div class="cdot"></div><div class="cdot"></div></div>
+  </div>
+
+  <!-- Ghost number -->
+  <div class="ghost-num">4</div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+    <div>
+      <div class="eyebrow">Tafsol Technologies &nbsp;|&nbsp; Independence Day</div>
+      <div class="date-pill">
+        <div class="pulse-dot"></div>
+        <span>July 4th, 2026</span>
+        <div class="pulse-dot"></div>
+      </div>
+      <div class="star-row">
+        <i>★</i><i>★</i><i>★</i><i>★</i><i>★</i>
+      </div>
+      <div class="headline">
+        <span class="h-happy">HAPPY</span>
+        <span class="h-4th">4TH &nbsp;</span><span class="h-of">OF</span>
+        <span class="h-july">JULY</span>
+      </div>
+      <div class="subtitle">Freedom &nbsp;·&nbsp; Innovation &nbsp;·&nbsp; Endless Possibilities</div>
+      <div class="message">
+        Today we celebrate the spirit of independence, innovation, and the<br>
+        opportunities that drive progress. Wishing our clients, partners,<br>
+        and friends across the United States a joyful Independence Day.
+      </div>
+    </div>
+
+    <div>
+      <div class="divider">
+        <div class="div-line"></div>
+        <div class="div-star">★</div>
+        <div style="width:60px;height:1px;background:linear-gradient(90deg,rgba(200,168,75,0.6),transparent);"></div>
+      </div>
+      <div class="branding">
+        <div class="logo-block">
+          <div class="logo-icon">T</div>
+          <div>
+            <div class="logo-name">Tafsol <span>Technologies</span></div>
+            <div class="logo-tagline">Empowering Businesses Through Technology</div>
+          </div>
+        </div>
+        <div class="social-col">
+          <div class="social-row">
+            <div class="sicon">in</div>
+            <div class="sicon">f</div>
+            <div class="sicon">◎</div>
+            <div class="sicon">🌐</div>
+          </div>
+          <div class="website-txt">www.tafsol.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Generate star field ──
+const sf = document.getElementById('starsField');
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star-dot';
+  const size=Math.random()*2.5+0.5;
+  s.style.cssText=`
+    width:${size}px;height:${size}px;
+    top:${Math.random()*60}%;
+    left:${Math.random()*100}%;
+    opacity:${Math.random()*0.5+0.1};
+    animation-duration:${Math.random()*3+2}s;
+    animation-delay:${Math.random()*4}s;
+  `;
+  sf.appendChild(s);
+}
+
+// ── Generate particles ──
+const pc=document.getElementById('particles');
+const colors=['#C8A84B','#4a90ff','#FF2244','#ffffff','#88AAFF'];
+for(let i=0;i<30;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  const size=Math.random()*4+1.5;
+  p.style.cssText=`
+    width:${size}px;height:${size}px;
+    background:${colors[Math.floor(Math.random()*colors.length)]};
+    left:${Math.random()*100}%;
+    bottom:${Math.random()*40+5}%;
+    animation-duration:${Math.random()*6+4}s;
+    animation-delay:${Math.random()*6}s;
+    box-shadow:0 0 ${size*2}px currentColor;
+  `;
+  pc.appendChild(p);
+}
+
+// ── Build American flag ──
+const fw=document.getElementById('flagWrap');
+const stripes=document.createElementNS('http://www.w3.org/2000/svg','svg');
+stripes.setAttribute('width','380');stripes.setAttribute('height','260');
+stripes.setAttribute('viewBox','0 0 380 260');
+let svgHtml='';
+const stripeColors=['#BF0A30','#FFFFFF'];
+for(let i=0;i<13;i++){
+  svgHtml+=`<rect x="0" y="${i*20}" width="380" height="20" fill="${stripeColors[i%2]}"/>`;
+}
+svgHtml+=`<rect x="0" y="0" width="152" height="140" fill="#002868"/>`;
+// Stars in canton
+for(let row=0;row<9;row++){
+  const cols=row%2===0?6:5;
+  const startX=row%2===0?12:18;
+  for(let col=0;col<cols;col++){
+    svgHtml+=`<text x="${startX+col*24}" y="${14+row*14}" font-size="10" fill="white" text-anchor="middle">★</text>`;
+  }
+}
+stripes.innerHTML=svgHtml;
+fw.appendChild(stripes);
+</script>
+</body>
+</html>
