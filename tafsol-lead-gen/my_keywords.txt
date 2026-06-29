@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────────────────────────
+#  TAFSOL — MY CUSTOM KEYWORDS
+#  Yahan apne keywords likho, ek line = ek keyword
+#  # se shuru hone wali lines ignore ho jaati hain (comments)
+#  smart_search.py yeh file read karke search karega
+# ─────────────────────────────────────────────────────────────
+
+# ── Direct requirement posts (highest priority) ───────────────
+need a developer
+looking for developer
+need software developer
+looking for software company
+need development team
+looking for development agency
+need a web developer
+need mobile app developer
+hire a developer
+need backend developer
+need frontend developer
+need full stack developer
+
+# ── Project specific ──────────────────────────────────────────
+build an app
+build a website
+build MVP
+need to build a platform
+looking for someone to build
+need a tech partner
+need technical cofounder
+
+# ── AI / Automation demand ────────────────────────────────────
+need ChatGPT integration
+need AI automation
+need chatbot for website
+automate my business
+need workflow automation
+
+# ── Outsourcing signals ───────────────────────────────────────
+software outsourcing
+offshore development team
+dedicated development team
+outsource development
+
+# ── Pain points ───────────────────────────────────────────────
+my developer quit
+fired my developer
+developer ghosted me
+looking to replace developer
+website is broken
+app not working
+need to redo my website
+
+# ── Add your own keywords below ───────────────────────────────
